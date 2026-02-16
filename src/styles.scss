@@ -1,0 +1,173 @@
+/* Global styles and Angular Material theme */
+
+// Import Angular Material theming
+@use '@angular/material' as mat;
+
+// Define custom theme
+@include mat.core();
+
+$my-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$my-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$my-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$my-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  ),
+  typography: mat.m2-define-typography-config(),
+  density: 0,
+));
+
+@include mat.all-component-themes($my-theme);
+
+// Global styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+// FullCalendar custom styles
+.fc {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  .fc-button {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+    text-transform: capitalize;
+
+    &:hover {
+      background-color: #303f9f;
+      border-color: #303f9f;
+    }
+
+    &:disabled {
+      background-color: #9fa8da;
+      border-color: #9fa8da;
+    }
+  }
+
+  .fc-button-primary:not(:disabled):active,
+  .fc-button-primary:not(:disabled).fc-button-active {
+    background-color: #303f9f;
+    border-color: #303f9f;
+  }
+
+  .fc-daygrid-event {
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-size: 0.85em;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .fc-event {
+    &.event-type-exam {
+      font-weight: 600;
+      border-left: 4px solid #f44336;
+    }
+
+    &.event-type-quiz {
+      border-left: 4px solid #ff9800;
+    }
+
+    &.event-type-assignment {
+      border-left: 4px solid #4caf50;
+    }
+
+    &.event-type-project {
+      border-left: 4px solid #9c27b0;
+    }
+  }
+
+  .fc-toolbar-title {
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+
+  .fc-col-header-cell {
+    font-weight: 600;
+    color: #666;
+  }
+
+  .fc-day-today {
+    background-color: #e8eaf6 !important;
+  }
+}
+
+// Material button spacing fixes
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-icon-button {
+  .mat-icon {
+    vertical-align: middle;
+  }
+
+  // Ensure icons inside buttons have proper spacing
+  &:not(.mat-mdc-icon-button) .mat-icon {
+    margin-right: 8px;
+  }
+}
+
+.mat-mdc-button-toggle {
+  .mat-icon {
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+}
+
+// Prevent text overlap in all buttons
+button {
+  white-space: nowrap;
+
+  &:not(.mat-mdc-icon-button) {
+    mat-icon {
+      display: inline-flex;
+      align-items: center;
+      vertical-align: middle;
+    }
+  }
+}
+
+// Fix for chip buttons
+.mat-mdc-chip {
+  .mat-icon {
+    margin-left: 8px;
+  }
+}
+
+// Scrollbar styles
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+
+  &:hover {
+    background: #555;
+  }
+}
