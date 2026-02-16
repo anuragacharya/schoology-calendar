@@ -1,59 +1,99 @@
-# SchoologyCalendar
+# Schoology Calendar Web App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+A modern web application to view and manage your Schoology calendar events and assignments. Import your Schoology calendar .ics file and view all your events in a beautiful calendar interface.
 
-## Development server
+## Features
+
+- 📅 Beautiful calendar view with day, week, and month views
+- 📥 Import Schoology calendar via .ics file
+- 📊 View all assignments and exams in one place
+- 💾 Local storage - your data stays on your device
+- 🎨 Material Design UI with Angular Material
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18 or higher)
+- npm (v11 or higher)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/anuragacharya/schoology-calendar.git
+cd schoology-calendar
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+### Development Server
 
 To start a local development server, run:
 
 ```bash
-ng serve
+npm start
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+## How to Use
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. **Login**: Enter your Schoology email and password (stored locally in your browser)
+2. **Import Calendar**:
+   - Go to your Schoology calendar
+   - Export your calendar as an .ics file
+   - Import the file into the app
+3. **View Events**: Browse your assignments and exams in the calendar view
+4. **Update**: Re-import your calendar file to sync new events
 
-```bash
-ng generate component component-name
-```
+## Building for Production
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+To build the project for production:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This will compile your project and store the build artifacts in the `dist/` directory, optimized for performance and speed.
 
-## Running unit tests
+## Technology Stack
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- **Frontend Framework**: Angular 21
+- **UI Components**: Angular Material
+- **Calendar**: FullCalendar
+- **Local Database**: Dexie (IndexedDB wrapper)
+- **ICS Parsing**: ical.js
+
+## Running Tests
+
+To execute unit tests with [Vitest](https://vitest.dev/):
 
 ```bash
-ng test
+npm test
 ```
 
-## Running end-to-end tests
+## Project Structure
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```
+src/
+├── app/
+│   ├── core/
+│   │   ├── models/          # Data models
+│   │   └── services/        # Business logic services
+│   ├── features/
+│   │   ├── login/           # Login component
+│   │   ├── calendar/        # Calendar view
+│   │   └── import/          # ICS import component
+│   └── app.ts               # Root component
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Contributing
 
-## Additional Resources
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## License
+
+This project is licensed under the MIT License.

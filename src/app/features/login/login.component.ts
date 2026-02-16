@@ -8,13 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
-// Extend Window interface to include electronAPI
-declare global {
-  interface Window {
-    electronAPI?: any;
-  }
-}
+import { StorageService } from '../../core/services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -84,7 +78,7 @@ declare global {
                 class="login-button"
               >
                 <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
-                <span *ngIf="!isLoading">Login & Start Sync</span>
+                <span *ngIf="!isLoading">Continue to Calendar</span>
                 <span *ngIf="isLoading">Logging in...</span>
               </button>
             </div>
@@ -95,9 +89,9 @@ declare global {
             <div class="info-text">
               <p><strong>How it works:</strong></p>
               <ul>
-                <li>Your credentials are stored securely on your computer</li>
-                <li>App automatically syncs every 30 minutes</li>
-                <li>See all your assignments and exams in one place</li>
+                <li>Import your Schoology calendar .ics file</li>
+                <li>View all your assignments and exams in one place</li>
+                <li>Sync updates by re-importing your calendar</li>
               </ul>
             </div>
           </div>
@@ -191,24 +185,15 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private storage: StorageService
   ) {}
 
   async ngOnInit() {
-    // Check if we're running in Electron
-    if (!window.electronAPI) {
-      this.snackBar.open(
-        'This app must be run in Electron desktop environment',
-        'Close',
-        { duration: 5000 }
-      );
-      return;
-    }
-
-    // Check if credentials already exist
-    const result = await window.electronAPI.getCredentials();
-    if (result.success && result.credentials) {
-      // Credentials exist, navigate to calendar
+    // Check if user has already logged in (has events data)
+    const events = await this.storage.getAllEvents();
+    if (events.length > 0) {
+      // User has data, navigate to calendar
       this.router.navigate(['/calendar']);
     }
   }
@@ -221,31 +206,18 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    if (!window.electronAPI) {
-      this.snackBar.open('Electron API not available', 'Close', {
-        duration: 3000
-      });
-      return;
-    }
-
     this.isLoading = true;
 
     try {
-      // Save credentials
-      const saveResult = await window.electronAPI.saveCredentials({
-        email: this.email,
-        password: this.password
-      });
+      // Store credentials in localStorage (Note: This is just for demo - in production,
+      // you would validate against Schoology API)
+      localStorage.setItem('schoology_email', this.email);
 
-      if (!saveResult.success) {
-        throw new Error(saveResult.error || 'Failed to save credentials');
-      }
-
-      this.snackBar.open('Login successful! Starting sync...', 'Close', {
+      this.snackBar.open('Login successful! Please import your calendar.', 'Close', {
         duration: 3000
       });
 
-      // Navigate to calendar
+      // Navigate to calendar/import view
       setTimeout(() => {
         this.router.navigate(['/calendar']);
       }, 1000);

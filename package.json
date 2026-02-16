@@ -1,45 +1,14 @@
 {
   "name": "schoology-calendar",
   "version": "1.0.0",
-  "description": "Real-time Schoology Calendar Sync Desktop App",
-  "main": "electron/main.js",
-  "author": "Your Name",
+  "description": "Schoology Calendar Web App",
+  "author": "anuragacharya",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "electron": "electron .",
-    "electron:dev": "NODE_ENV=development electron .",
-    "electron:build": "ng build --configuration production && electron-builder",
-    "electron:build:mac": "ng build --configuration production && electron-builder --mac",
-    "electron:build:win": "ng build --configuration production && electron-builder --win",
-    "electron:build:linux": "ng build --configuration production && electron-builder --linux"
-  },
-  "build": {
-    "appId": "com.schoology.calendar",
-    "productName": "Schoology Calendar",
-    "directories": {
-      "output": "dist-electron"
-    },
-    "files": [
-      "electron/**/*",
-      "dist/schoology-calendar/**/*",
-      "package.json"
-    ],
-    "mac": {
-      "target": "dmg",
-      "icon": "public/favicon.ico"
-    },
-    "win": {
-      "target": "nsis",
-      "icon": "public/favicon.ico"
-    },
-    "linux": {
-      "target": "AppImage",
-      "icon": "public/favicon.ico"
-    }
+    "test": "ng test"
   },
   "prettier": {
     "printWidth": 100,
@@ -70,13 +39,7 @@
     "@fullcalendar/interaction": "^6.1.20",
     "@fullcalendar/timegrid": "^6.1.20",
     "dexie": "^4.3.0",
-    "electron": "^40.4.1",
-    "electron-builder": "^26.7.0",
-    "electron-store": "^11.0.2",
     "ical.js": "^2.2.1",
-    "puppeteer": "^24.37.3",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
